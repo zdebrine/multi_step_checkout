@@ -51,9 +51,6 @@ class App extends React.Component {
                 });
         }
     }
-    checkCurrentState = () => {
-        console.log(this.state);
-    }
 
     handleInputChange = (event) => {
         var stateId = event.target.id;
@@ -62,6 +59,14 @@ class App extends React.Component {
             [stateId]: stateValue
         });
     }
+    clearForm = (formNum) => { 
+        var formToclear = 'form' + (formNum - 1);
+        if (formNum === '1') {
+            formToclear = 'form3';
+        }
+        document.getElementById(formToclear).reset();
+      }
+      
 
     onbuttonClick = (event) => {
         var key = event.target.id;
@@ -70,6 +75,7 @@ class App extends React.Component {
         this.setState({
             [key]: step
         });
+        this.clearForm(step);
         this.onFormSubmit(step);
     }
 
@@ -79,7 +85,7 @@ class App extends React.Component {
             return (
                 <>
                     <div>
-                        <form>
+                        <form id='form1'>
                             <label>
                                 Name:
                 <br />
@@ -104,7 +110,6 @@ class App extends React.Component {
                             <button onClick={this.onbuttonClick} id='currentStep' name='2'>SUBMIT</button>
                         </form>
                     </div>
-                    <button onClick={this.checkCurrentState}>Check State</button>
                 </>
             );
         } 
@@ -112,7 +117,7 @@ class App extends React.Component {
             return (
                 <>
                     <div>
-                        <form>
+                        <form id='form2'>
                             <label>
                                 Address line 1:
                  <br />
@@ -151,14 +156,13 @@ class App extends React.Component {
                             <button onClick={this.onbuttonClick} id='currentStep' name='3'>SUBMIT</button>
                         </form>
                     </div>
-                    <button onClick={this.checkCurrentState}>Check State</button>
                 </>
             );
         }  else if (step === '3') {
             return (
                 <>
                     <div>
-                        <form>
+                        <form id='form3'>
                             <label>
                                 Card #:
                  <br />
@@ -190,7 +194,6 @@ class App extends React.Component {
                             <button onClick={this.onbuttonClick} id='currentStep' name='1'>SUBMIT</button>
                         </form>
                     </div>
-                    <button onClick={this.checkCurrentState}>Check State</button>
                 </>
             );
         }
